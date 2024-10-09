@@ -8,6 +8,8 @@ char	*ft_free(char *buffer, char *buf)
 	free(buffer);
 	return (temp);
 }
+// Esta funcion concatena dos strings de memoria usando strjoin y libera
+// uno de los primeros strings ya que se ha almacenado en la nueva variable temp
 
 char	*ft_next(char *buffer)
 {
