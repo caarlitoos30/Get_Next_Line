@@ -49,7 +49,6 @@ char	*ft_line(char *buffer)
 		line[i] = buffer[i];
 		i++;
 	}
-	// if eol is \0 or \n, replace eol by \n
 	if (buffer[i] && buffer[i] == '\n')
 		line[i++] = '\n';
 	return (line);
@@ -60,26 +59,20 @@ char	*read_file(int fd, char *res)
 	char	*buffer;
 	int		byte_read;
 
-	// malloc if res dont exist
 	if (!res)
 		res = ft_calloc(1, 1);
-	// malloc buffer
 	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	byte_read = 1;
 	while (byte_read > 0)
 	{
-		// while not eof read
 		byte_read = read(fd, buffer, BUFFER_SIZE);
 		if (byte_read == -1)
 		{
 			free(buffer);
 			return (NULL);
 		}
-		// 0 to end for leak
 		buffer[byte_read] = 0;
-		// join and free
 		res = ft_free(res, buffer);
-		// quit if \n find
 		if (ft_strchr(buffer, '\n'))
 			break ;
 	}
