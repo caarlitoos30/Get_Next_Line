@@ -23,34 +23,27 @@ char	*ft_next(char *buffer)
 		free(buffer);
 		return (NULL);
 	}
-	// len of file - len of firstline + 1
 	line = ft_calloc((ft_strlen(buffer) - i + 1), sizeof(char));
 	i++;
 	j = 0;
-	// line == buffer
 	while (buffer[i])
 		line[j++] = buffer[i++];
 	free(buffer);
 	return (line);
 }
 
-// take line for return
 char	*ft_line(char *buffer)
 {
 	char	*line;
 	int		i;
 
 	i = 0;
-	// if no line return NULL
 	if (!buffer[i])
 		return (NULL);
-	// go to the eol
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
-	// malloc to eol
 	line = ft_calloc(i + 2, sizeof(char));
 	i = 0;
-	// line = buffer
 	while (buffer[i] && buffer[i] != '\n')
 	{
 		line[i] = buffer[i];
