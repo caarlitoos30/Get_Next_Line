@@ -1,6 +1,5 @@
 #include "get_next_line.h"
 
-// join and free
 char	*ft_free(char *buffer, char *buf)
 {
 	char	*temp;
@@ -10,7 +9,6 @@ char	*ft_free(char *buffer, char *buf)
 	return (temp);
 }
 
-// delete line find
 char	*ft_next(char *buffer)
 {
 	int		i;
@@ -18,10 +16,8 @@ char	*ft_next(char *buffer)
 	char	*line;
 
 	i = 0;
-	// find len of first line
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
-	// if eol == \0 return NULL
 	if (!buffer[i])
 	{
 		free(buffer);
