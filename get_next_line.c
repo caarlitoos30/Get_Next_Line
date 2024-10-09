@@ -85,7 +85,6 @@ char	*get_next_line(int fd)
 	static char	*buffer;
 	char		*line;
 
-	// error handling
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
 	buffer = read_file(fd, buffer);
