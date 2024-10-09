@@ -10,7 +10,6 @@ char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strchr(const char *str, size_t i);
 void	ft_bzero(void *str, size_t len);
 void	*ft_calloc(size_t count, size_t size);
-
 size_t	ft_strlen(const char *str);
 
 #endif
