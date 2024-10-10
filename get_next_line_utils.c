@@ -1,71 +1,94 @@
 
 
-void	*ft_memset(void *b, int c, size_t len)
+#include "get_next_line.h"
+
+int	ft_strlen(char *str)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	while (i < len)
-	{
-		((char *)b)[i] = (unsigned char)c;
+	if (!str)
+		return (0);
+	while (str[i])
 		i++;
-	}
-	return (b);
-}
-
-void	ft_bzero(void *str, size_t len)
-{
-	ft_memset(str, '\0', len);
-}
-
-size_t	ft_strlen(const char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str [i] != '\0')
-	{
-		i++;
-	}
 	return (i);
 }
 
-char	*ft_strchr(const char *str, size_t i)
-
+char	*ft_strrchr(char *s, int c)
 {
-	while ((*str != '\0') && (*str != (char)i))
-		str++;
-	if (*str == (char)i)
-		return ((char *)str);
+	int	len;
+
+	len = ft_strlen(s);
+	while (len >= 0)
+	{
+		if (s[len] == (unsigned char)c)
+			return ((char *)s);
+		len--;
+	}
 	return (0);
-}
-
-char	*ft_strjoin(const char *s1, const char *s2)
-{
-	char	*str;
-	size_t	str_len;
-	size_t	i;
-
-	str_len = (ft_strlen(s1) + ft_strlen(s2) + 1);
-	str = (char *)malloc(sizeof(char) * str_len);
-	if (!s1 || !s2 || !str)
-		return (0);
-	i = 0;
-	while (*s1)
-		str[i++] = *s1++;
-	while (*s2)
-		str[i++] = *s2++;
-	str[i] = 0;
-	return (str);
 }
 
 void	*ft_calloc(size_t count, size_t size)
 {
-	void	*result;
+	char	*ptr;
+	size_t	i;
 
-	result = malloc(count * size);
-	if (!result)
-		return (0);
-	ft_bzero(result, count * size);
-	return (result);
+	i = 0;
+	ptr = malloc(count * size);
+	if (!ptr)
+		return (NULL);
+	while (i < count * size)
+	{
+		ptr[i] = 0;
+		i++;
+	}
+	return (ptr);
+}
+
+char	*ft_substr(char *s, int start, int len)
+{
+	char	*dst;
+	int		i;
+
+	if ((!s) || (start > ft_strlen(s)))
+		return (NULL);
+	if (len > (ft_strlen(s) - start))
+		len = ft_strlen(s) - start;
+	dst = ft_calloc(sizeof(char), len + 2);
+	if (!dst)
+		return (NULL);
+	i = 0;
+	while (len >= i)
+	{
+		dst[i] = s[start + i];
+		i++;
+	}
+	return (dst);
+}
+
+char	*ft_strjoin(char *stash, char *buff)
+{
+	char	*str;
+	int		i;
+	int		j;
+
+	if (!stash || !buff)
+		return (NULL);
+	str = ft_calloc(sizeof(char), ft_strlen(stash) + ft_strlen(buff) + 1);
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (stash[i])
+	{
+		str[i] = stash[i];
+		i++;
+	}
+	j = 0;
+	while (buff[j])
+	{
+		str[i + j] = buff[j];
+		j++;
+	}
+	free(stash);
+	return (str);
 }
