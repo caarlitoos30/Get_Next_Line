@@ -1,12 +1,14 @@
 #include "get_next_line.h"
 
-char	*ft_get_stash(int fd, char *stash)
+#include "get_next_line.h"
+
+char	*ft_get_buffer(int fd, char *buffer)
 {
 	char	*buff;
 	int		readed;
 
-	if (!stash)
-		stash = ft_calloc(sizeof(char), 1);
+	if (!buffer)
+		buffer = ft_calloc(sizeof(char), 1);
 	buff = ft_calloc(sizeof(char), (BUFFER_SIZE + 1));
 	if (!buff)
 		return (NULL);
@@ -17,61 +19,61 @@ char	*ft_get_stash(int fd, char *stash)
 		if (readed == -1)
 		{
 			free(buff);
-			free(stash);
+			free(buffer);
 			return (NULL);
 		}
 		buff[readed] = '\0';
-		stash = ft_strjoin(stash, buff);
+		buffer = ft_strjoin(buffer, buff);
 	}
 	free(buff);
-	return (stash);
+	return (buffer);
 }
 
-char	*ft_get_line(char *stash)
+char	*ft_get_line(char *buffer)
 {
 	char	*line;
 	int		i;
 
-	if (!stash[0])
+	if (!buffer[0])
 		return (NULL);
 	i = 0;
-	while (stash[i] != '\0' && stash[i] != '\n')
+	while (buffer[i] != '\0' && buffer[i] != '\n')
 		i++;
-	line = ft_substr(stash, 0, i);
-	if (stash[i] == '\n')
-		line[i] = stash[i];
+	line = ft_substr(buffer, 0, i);
+	if (buffer[i] == '\n')
+		line[i] = buffer[i];
 	return (line);
 }
 
-char	*ft_get_clean(char *stash)
+char	*ft_get_clean(char *buffer)
 {
 	char	*aux;
 	int		i;
 
 	i = 0;
-	while (stash[i] != '\n' && stash[i] != '\0')
+	while (buffer[i] != '\n' && buffer[i] != '\0')
 		i++;
-	if (!stash[i])
+	if (!buffer[i])
 	{
-		free(stash);
+		free(buffer);
 		return (NULL);
 	}
-	aux = ft_substr(stash, i + 1, ft_strlen(stash));
-	free(stash);
+	aux = ft_substr(buffer, i + 1, ft_strlen(buffer));
+	free(buffer);
 	return (aux);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*stash;
+	static char	*buffer;
 	char		*line;
 
 	if (BUFFER_SIZE <= 0 || fd < 0)
 		return (NULL);
-	stash = ft_get_stash(fd, stash);
-	if (!stash)
+	buffer = ft_get_buffer(fd, buffer);
+	if (!buffer)
 		return (NULL);
-	line = ft_get_line(stash);
-	stash = ft_get_clean(stash);
+	line = ft_get_line(buffer);
+	buffer = ft_get_clean(buffer);
 	return (line);
 }
