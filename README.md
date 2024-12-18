@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-El objetivo de este proyecto es crear una función en C que lea líneas una por una de un File Descriptor. Esta función debe ser capaz de manejar archivos de texto de manera eficiente, devolviendo cada línea de forma individual.
+El objetivo de este proyecto es crear una función en C que lea líneas una por una de un File Descriptor. Esta función debe ser capaz de manejar archivos de texto de manera eficiente, devolviendo cada línea de forma individual. El objetivo de este proyecto es la introducción a las variables estáticas y el manejo de la memoria con malloc en C.
 
 ## Descripción del Proyecto
 
