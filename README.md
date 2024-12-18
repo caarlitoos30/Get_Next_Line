@@ -10,6 +10,5 @@ En este proyecto, deberás implementar la función `get_next_line`, que toma un 
 
 ## Requisitos
 
-- El programa debe ser capaz de manejar múltiples archivos abiertos a la vez.
 - Debes asegurarte de que la función maneje correctamente la memoria, liberándola después de cada uso.
 - El programa no debe depender de funciones de la biblioteca estándar como `getline`.
